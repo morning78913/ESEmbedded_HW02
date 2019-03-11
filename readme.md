@@ -51,8 +51,13 @@ This is the hw02 sample. Please follow the steps below.
 
 --------------------
 
-- [x] **If you volunteer to give the presentation next week, check this.**
+- [] **If you volunteer to give the presentation next week, check this.**
 
 --------------------
 
 Please take your note here.
+
+# Observe
+
+1.Modify main.s to observe `push` and `pop` like below.
+
