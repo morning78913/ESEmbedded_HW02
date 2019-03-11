@@ -51,8 +51,111 @@ This is the hw02 sample. Please follow the steps below.
 
 --------------------
 
-- [x] **If you volunteer to give the presentation next week, check this.**
+- [ ] **If you volunteer to give the presentation next week, check this.**
 
 --------------------
 
 Please take your note here.
+
+# 實驗題目
+
+觀察暫存器在有順序的`push`以及`pop`的情況底下會不會影響執行結果?
+
+1.修改`main.s`檔如下圖
+
+```
+.syntax unified
+
+.word 0x20000100
+.word _start
+
+.global _start
+.type _start, %function
+_start:
+        //
+        //mov # to reg
+        //
+        mov     r0,     #1
+        mov     r1,     #2
+        mov     r2,     #3
+
+        //      
+        //push and pop
+        //
+        push    {r0, r1, r2}
+        pop     {r3, r4, r5}
+
+        //reset
+        mov     r0,     #0
+        mov     r1,     #0
+        mov     r2,     #0
+        mov     r3,     #0
+        mov     r4,     #0
+        mov     r5,     #0
+//=======================================
+        //
+        //mov # to reg
+        //
+        mov     r0,     #1
+        mov     r1,     #2
+        mov     r2,     #3
+
+        //
+        //push and pop
+        //
+        push    {r2, r0, r1}
+        pop     {r3, r4, r5}
+
+```
+
+![image](https://github.com/morning78913/ESEmbedded_HW02/blob/master/img/1_main_s.jpg)
+
+* Step12~14是將r0, r1, r2分別存入值1, 2, 3
+* 接著依序`push`r0, r1, r2
+* 可以發現到值1, 2, 3分別被存在以下位址中:
+
+0x200000f4 | 0x200000f8 | 0X200000fc
+------------ | ------------ | ------------
+1 | 2 | 3
+
+![image](https://github.com/morning78913/ESEmbedded_HW02/blob/master/img/3_push_1.jpg)
+
+* 可以發現`pop`出來至r3, r4, r5觀察結果即為:
+
+r3 | r4 | r5
+------------ | ------------ | ------------
+1 | 2 | 3
+
+![image](https://github.com/morning78913/ESEmbedded_HW02/blob/master/img/4_pop_1.jpg)
+
+### 如果將原先的r0, r1, r2順序改為r2. r0, r1呢?
+
+* 此時可以看到0x3c的順序再編譯之後被改成了r0, r1, r2並且`push`進去
+
+![image](https://github.com/morning78913/ESEmbedded_HW02/blob/master/img/5_PUSH_2.jpg)
+
+* 而r3, r4, r5在經過`pop`同樣為:
+
+r3 | r4 | r5
+------------ | ------------ | ------------
+1 | 2 | 3
+
+![image](https://github.com/morning78913/ESEmbedded_HW02/blob/master/img/6_POP_2.jpg)
+
+結果與討論
+===
+
+* 其實經由編譯後出現的警告訊息就可以知道
+
+![image](https://github.com/morning78913/ESEmbedded_HW02/blob/master/img/2_Warning%20message.jpg)
+
+* 而由`ARM Architecture Reference Manual`手冊也可以找到`push`以及`pop`的相關說明
+
+![image](https://github.com/morning78913/ESEmbedded_HW02/blob/master/img/ARM.jpg)
+
+### 實驗結果
+
+1. 任意改變`push`以及`pop`的順序並不會影響執行的結果，也就是說如果將原先的r0, r1, r2順序改為r2, r0, r1在編譯過後，編譯器會自動依序調整為r0, r1, r2的順序，而且會優先的讓從較低暫存器`push`進stack。
+
+2. 程式的第一階段會`push`三種不同的值進去，隨後再`pop`丟給r3, r4, r5以利觀察結果。隨後會將r0~r5全部清空方便下次的觀察，只是第二階段的順序將會改成`r2, r0, r1`。
+
