@@ -87,7 +87,7 @@ r3 | r4 | r5
 
 * 此時可以看到0x3c的順序再編譯之後被改成了r0, r1, r2並且`push`進去
 
-![image](https://github.com/morning78913/ESEmbedded_HW02/blob/master/img/5_pop_2.jpg)
+![image](https://github.com/morning78913/ESEmbedded_HW02/blob/master/img/5_PUSH_2.jpg)
 
 * 而r3, r4, r5在經過`pop`同樣為:
 
@@ -95,5 +95,11 @@ r3 | r4 | r5
 ------------ | ------------ | ------------
 3 | 2 | 1
 
-![image](https://github.com/morning78913/ESEmbedded_HW02/blob/master/img/6_pop_2.jpg)
+![image](https://github.com/morning78913/ESEmbedded_HW02/blob/master/img/6_POP_2.jpg)
+
+=== 
+
+* 其實經由編譯後出現的警告訊息就可以知道
+
+![image](https://github.com/morning78913/ESEmbedded_HW02/blob/master/img/2_Warning message.jpg)
 
