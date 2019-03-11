@@ -149,6 +149,10 @@ r3 | r4 | r5
 
 ![image](https://github.com/morning78913/ESEmbedded_HW02/blob/master/img/2_Warning%20message.jpg)
 
+* 而由`ARM Architecture Reference Manual`手冊也可以找到`push`以及`pop`的相關說明
+
+![image](https://github.com/morning78913/ESEmbedded_HW02/blob/master/img/ARM.jpg)
+
 ### 實驗結果
 
 1. 任意改變`push`以及`pop`的順序並不會影響執行的結果，也就是說如果將原先的r0, r1, r2順序改為r2, r0, r1在編譯過後，編譯器會自動依序調整為r0, r1, r2的順序，而且會優先的讓r0`push`進stack。
