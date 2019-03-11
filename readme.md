@@ -51,13 +51,31 @@ This is the hw02 sample. Please follow the steps below.
 
 --------------------
 
-- [] **If you volunteer to give the presentation next week, check this.**
+- [ ] **If you volunteer to give the presentation next week, check this.**
 
 --------------------
 
 Please take your note here.
 
-# Observe
+# 實驗題目
 
-1.Modify main.s to observe `push` and `pop` like below.
+觀察暫存器在有順序的`push`以及`pop`的情況底下會不會影響執行結果?
 
+1.修改`main.s`檔如下圖
+
+![image](https://github.com/morning78913/ESEmbedded_HW02/blob/master/img/1_main_s.jpg)
+
+* Step12~14是將r0, r1, r2分別存入值1, 2, 3
+* 接著依序`push`r0, r1, r2
+
+![image](github.com/morning78913/ESEmbedded_HW02/blob/master/img/3_push_1.jpg)
+
+* 可以發現到值1, 2, 3分別被存在以下位址中:
+
+0x200000fc | 0x200000f8 | 0X200000f4
+------------ | ------------ | ------------
+3 | 2 | 1
+
+
+
+* 可以發現`pop`出來至r3, r4, r5觀察結果
