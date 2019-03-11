@@ -142,7 +142,8 @@ r3 | r4 | r5
 
 ![image](https://github.com/morning78913/ESEmbedded_HW02/blob/master/img/6_POP_2.jpg)
 
-=== 
+結果與討論
+===
 
 * 其實經由編譯後出現的警告訊息就可以知道
 
